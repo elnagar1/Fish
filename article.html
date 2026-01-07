@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="مقال - مستشار مزارع الأسماك">
+    <title>المقال - مستشار مزارع الأسماك 🐟</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        .article-page {
+            padding: 100px 0 50px;
+            min-height: 100vh;
+        }
+
+        .article-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 60px 0;
+            margin-bottom: 50px;
+            color: white;
+            text-align: center;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .article-main-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .article-content-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+
+        .article-body h1,
+        .article-body h2,
+        .article-body h3,
+        .article-body h4 {
+            color: #1abc9c;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .article-body h1 {
+            font-size: 2rem;
+            border-bottom: 3px solid #1abc9c;
+            padding-bottom: 10px;
+        }
+
+        .article-body h2 {
+            font-size: 1.7rem;
+            color: #16a085;
+        }
+
+        .article-body h3 {
+            font-size: 1.4rem;
+            color: #27ae60;
+        }
+
+        .article-body p {
+            margin-bottom: 20px;
+            color: #34495e;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin: 20px 0;
+            padding-right: 30px;
+            color: #34495e;
+        }
+
+        .article-body li {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .article-body strong {
+            color: #e74c3c;
+            font-weight: 700;
+        }
+
+
+        .article-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-body table th,
+        .article-body table td {
+            padding: 15px;
+            text-align: right;
+            border: 1px solid #e0e0e0;
+        }
+
+        .article-body table th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 700;
+        }
+
+        .article-body table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .article-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+        }
+
+        .btn-primary-action {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary-action:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 188, 156, 0.3);
+        }
+
+        .btn-secondary-action {
+            background: #ecf0f1;
+            color: var(--text-color);
+        }
+
+        .btn-secondary-action:hover {
+            background: #bdc3c7;
+            transform: translateY(-2px);
+        }
+
+        .loading-article {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .error-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        .error-title {
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .error-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .article-main-title {
+                font-size: 1.8rem;
+            }
+
+            .article-content-wrapper {
+                padding: 30px 20px;
+            }
+
+            .article-body {
+                font-size: 1rem;
+            }
+
+            .article-actions {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="ocean-bg">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🐟</span>
+                <h1>مستشار مزارع الأسماك</h1>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="articles.html" class="nav-link active"><i class="fas fa-book-open"></i> المقالات</a>
+                <a href="index.html#consult" class="nav-link"><i class="fas fa-comments"></i> استشارة</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="loading-article">
+        <div class="loading-spinner"></div>
+        <p style="font-size: 1.2rem; color: var(--text-muted);">جاري تحميل المقال...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" class="error-message" style="display: none;">
+        <div class="error-icon">😞</div>
+        <h2 class="error-title">عذراً، لم نتمكن من العثور على المقال</h2>
+        <p class="error-text">المقال المطلوب غير موجود أو تم حذفه</p>
+        <a href="articles.html" class="btn btn-primary">
+            <i class="fas fa-arrow-right"></i> العودة للمقالات
+        </a>
+    </div>
+
+    <!-- Article Content -->
+    <main id="articleContent" class="article-page" style="display: none;">
+        <!-- Article Header -->
+        <div class="article-header">
+            <div class="container">
+                <span id="articleCategory" class="article-category"></span>
+                <h1 id="articleTitle" class="article-main-title"></h1>
+                <div class="article-meta">
+                    <div class="meta-item">
+                        <i class="far fa-calendar-alt"></i>
+                        <span id="articleDate"></span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="far fa-clock"></i>
+                        <span id="readingTime">5 دقائق قراءة</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article Body -->
+        <div class="container">
+            <div class="article-content-wrapper">
+                <div id="articleBody" class="article-body">
+                    <!-- Content will be loaded here -->
+                </div>
+
+                <!-- Actions -->
+                <div class="article-actions">
+                    <button onclick="window.print()" class="action-btn btn-secondary-action">
+                        <i class="fas fa-print"></i>
+                        طباعة
+                    </button>
+                    <button onclick="copyArticle()" class="action-btn btn-secondary-action">
+                        <i class="fas fa-copy"></i>
+                        نسخ
+                    </button>
+                    <a href="articles.html" class="action-btn btn-primary-action">
+                        <i class="fas fa-arrow-right"></i>
+                        العودة للمقالات
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span>🐟</span>
+                    <p>&copy; 2024 مستشار مزارع الأسماك. جميع الحقوق محفوظة.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Scripts -->
+    <script src="api.js?v=3.0"></script>
+    <script>
+        // Get article ID from URL hash
+        const articleId = window.location.hash.substring(1);
+
+        async function loadArticle() {
+            if (!articleId) {
+                showError();
+                return;
+            }
+
+            try {
+                const article = await API.getArticle(articleId);
+
+                if (!article) {
+                    showError();
+                    return;
+                }
+
+                displayArticle(article);
+            } catch (error) {
+                console.error('Error loading article:', error);
+                showError();
+            }
+        }
+
+        function displayArticle(article) {
+            // Hide loading, show content
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('articleContent').style.display = 'block';
+
+            // Set meta
+            document.title = `${article.title} - مستشار مزارع الأسماك`;
+
+            // Fill content
+            document.getElementById('articleCategory').textContent = article.category;
+            document.getElementById('articleTitle').textContent = article.title;
+            document.getElementById('articleDate').textContent = article.date;
+
+            // Calculate reading time (rough estimate: 200 words per minute)
+            const wordCount = article.content.split(/\s+/).length;
+            const readingTime = Math.ceil(wordCount / 200);
+            document.getElementById('readingTime').textContent = `${readingTime} دقائق قراءة`;
+
+            // Format and display content
+            const formattedContent = formatMarkdown(article.content);
+            document.getElementById('articleBody').innerHTML = formattedContent;
+        }
+
+        function formatMarkdown(text) {
+            if (!text) return '';
+
+            let html = text
+                // Headers
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+
+                // Bold
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+
+                // Tables (basic support)
+                .replace(/\|(.+)\|/g, (match) => {
+                    const cells = match.split('|').filter(c => c.trim());
+                    const cellTags = cells.map(c => `<td>${c.trim()}</td>`).join('');
+                    return `<tr>${cellTags}</tr>`;
+                })
+
+                // Line breaks
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>');
+
+            // Wrap in paragraphs if not already wrapped
+            if (!html.startsWith('<h') && !html.startsWith('<p>')) {
+                html = '<p>' + html + '</p>';
+            }
+
+            // Wrap tables
+            if (html.includes('<tr>')) {
+                html = html.replace(/(<tr>.*?<\/tr>)+/gs, '<table>$&</table>');
+            }
+
+            return html;
+        }
+
+        function showError() {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'block';
+        }
+
+        function copyArticle() {
+            const content = document.getElementById('articleBody').innerText;
+            const title = document.getElementById('articleTitle').textContent;
+            const fullText = `${title}\n\n${content}`;
+
+            navigator.clipboard.writeText(fullText).then(() => {
+                showToast('تم نسخ المقال بنجاح!', 'success');
+            }).catch(() => {
+                showToast('فشل النسخ', 'error');
+            });
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast toast-${type} show`;
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Load article on page load
+        document.addEventListener('DOMContentLoaded', loadArticle);
+    </script>
+</body>
+
+</html>

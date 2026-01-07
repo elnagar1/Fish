@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  fish-farm-app:
+    build: .
+    container_name: fish-farm-consultant
+    ports:
+      - "3000:3000"  # Frontend
+      - "3001:3001"  # Backend API
+    volumes:
+      - ./database.sqlite:/app/database.sqlite
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - fish-farm-network
+
+networks:
+  fish-farm-network:
+    driver: bridge

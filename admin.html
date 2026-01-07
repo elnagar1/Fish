@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - مستشار مزارع الأسماك</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="admin-styles.css">
+    <!-- Quill CCS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <span class="logo-icon">🐟</span>
+                <h2>لوحة التحكم</h2>
+            </div>
+            <nav class="admin-nav">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-home"></i> الرئيسية
+                </a>
+                <a href="#articles" class="nav-item" data-section="articles">
+                    <i class="fas fa-book-open"></i> إدارة المقالات
+                </a>
+                <a href="#content" class="nav-item" data-section="content">
+                    <i class="fas fa-edit"></i> تعديل المحتوى
+                </a>
+                <a href="#questions" class="nav-item" data-section="questions">
+                    <i class="fas fa-question-circle"></i> إدارة الأسئلة
+                </a>
+                <a href="#settings" class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i> الإعدادات
+                </a>
+                <a href="index.html" class="nav-item" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> عرض الموقع
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1 id="pageTitle">الرئيسية</h1>
+            </header>
+
+            <div class="admin-content">
+                <!-- Dashboard Section -->
+                <section id="dashboard-section" class="content-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="stat-info">
+                                <h3 id="articlesCount">0</h3>
+                                <p>إجمالي المقالات</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-question-circle"></i></div>
+                            <div class="stat-info">
+                                <h3>5</h3>
+                                <p>الأسئلة النشطة</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                            <div class="stat-info">
+                                <h3>-</h3>
+                                <p>الزيارات اليوم</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="welcome-card">
+                        <h2>مرحباً بك في لوحة التحكم! 👋</h2>
+                        <p>من هنا يمكنك إدارة جميع محتويات الموقع بسهولة.</p>
+                        <ul>
+                            <li>✅ إضافة وتعديل المقالات</li>
+                            <li>✅ تعديل النصوص والعناوين</li>
+                            <li>✅ إدارة الأسئلة والخيارات</li>
+                            <li>✅ تخصيص الإعدادات</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Articles Section -->
+                <section id="articles-section" class="content-section">
+                    <div class="section-header">
+                        <h2>إدارة المقالات</h2>
+                        <button class="btn btn-primary" id="addArticleBtn">
+                            <i class="fas fa-plus"></i> إضافة مقال جديد
+                        </button>
+                    </div>
+
+                    <div class="articles-list" id="articlesList">
+                        <!-- Articles will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Content Section -->
+                <section id="content-section" class="content-section">
+                    <h2>تعديل محتوى الموقع</h2>
+
+                    <div class="content-editor">
+                        <div class="editor-group">
+                            <label>عنوان الموقع الرئيسي</label>
+                            <input type="text" id="siteTitle" class="form-control" value="مستشار مزارع الأسماك">
+                        </div>
+
+                        <div class="editor-group">
+                            <label>عنوان Hero Section</label>
+                            <input type="text" id="heroTitle" class="form-control"
+                                value="استشارات ذكية لمزرعتك السمكية">
+                        </div>
+
+                        <div class="editor-group">
+                            <label>وصف Hero Section</label>
+                            <textarea id="heroDescription" class="form-control"
+                                rows="3">احصل على نصائح وتوجيهات متخصصة من خبير افتراضي مدعوم بالذكاء الاصطناعي.</textarea>
+                        </div>
+
+                        <div class="editor-group">
+                            <label>نص زر الاستشارة</label>
+                            <input type="text" id="ctaButtonText" class="form-control" value="ابدأ الاستشارة الآن">
+                        </div>
+
+                        <button class="btn btn-success" id="saveContentBtn">
+                            <i class="fas fa-save"></i> حفظ التعديلات
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Questions Section -->
+                <section id="questions-section" class="content-section">
+                    <h2>إدارة الأسئلة</h2>
+                    <div id="questionsList">
+                        <!-- Questions will be loaded here -->
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings-section" class="content-section">
+                    <h2>الإعدادات العامة</h2>
+
+                    <div class="settings-grid">
+                        <div class="setting-card">
+                            <h3><i class="fas fa-palette"></i> الألوان</h3>
+                            <div class="color-picker-group">
+                                <label>اللون الأساسي</label>
+                                <input type="color" id="primaryColor" value="#1a4a6e">
+                            </div>
+                            <div class="color-picker-group">
+                                <label>لون التمييز</label>
+                                <input type="color" id="accentColor" value="#2ecc71">
+                            </div>
+                        </div>
+
+                        <div class="setting-card">
+                            <h3><i class="fas fa-robot"></i> إعدادات الذكاء الاصطناعي</h3>
+                            <div class="form-group">
+                                <label>المزود الافتراضي</label>
+                                <select id="aiProvider" class="form-control">
+                                    <option value="gemini" selected>Google Gemini 1.5 Pro</option>
+                                    <option value="groq">⚡ Groq (Llama 3)</option>
+                                    <option value="openai">OpenAI GPT-4</option>
+                                    <option value="anthropic">Anthropic Claude 3.5</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Gemini API Key</label>
+                                <input type="password" id="geminiKey" class="form-control"
+                                    placeholder="أدخل مفتاح Gemini API">
+                            </div>
+                            <div class="form-group">
+                                <label>Groq API Key</label>
+                                <input type="password" id="groqKey" class="form-control"
+                                    placeholder="أدخل مفتاح Groq API">
+                            </div>
+                            <div class="form-group">
+                                <label>OpenAI API Key</label>
+                                <input type="password" id="openaiKey" class="form-control"
+                                    placeholder="أدخل مفتاح OpenAI API">
+                            </div>
+                            <div class="form-group">
+                                <label>Anthropic API Key</label>
+                                <input type="password" id="anthropicKey" class="form-control"
+                                    placeholder="أدخل مفتاح Anthropic API">
+                            </div>
+                            <div class="form-group" style="margin-top: 1.5rem;">
+                                <button class="btn btn-primary" id="saveAISettingsBtn" style="width: 100%;">
+                                    <i class="fas fa-save"></i> حفظ إعدادات الذكاء الاصطناعي
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="setting-card">
+                            <h3><i class="fas fa-database"></i> البيانات</h3>
+                            <button class="btn btn-secondary" id="exportDataBtn">
+                                <i class="fas fa-download"></i> تصدير البيانات
+                            </button>
+                            <button class="btn btn-secondary" id="importDataBtn">
+                                <i class="fas fa-upload"></i> استيراد البيانات
+                            </button>
+                            <input type="file" id="importFileInput" style="display: none;" accept=".json">
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Article Modal -->
+    <div class="modal" id="articleModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-xl">
+            <div class="modal-header">
+                <h3 id="articleModalTitle">إضافة مقال جديد</h3>
+                <button class="modal-close" id="closeArticleModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="articleForm">
+                    <input type="hidden" id="articleId">
+
+                    <div class="form-group">
+                        <label>عنوان المقال</label>
+                        <input type="text" id="articleTitle" class="form-control" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>التصنيف</label>
+                            <input type="text" id="articleCategory" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>الأيقونة (Emoji)</label>
+                            <input type="text" id="articleIcon" class="form-control" placeholder="🐟" required>
+                        </div>
+                        <div class="form-group">
+                            <label>التاريخ</label>
+                            <input type="date" id="articleDate" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>صورة المقال (اختياري)</label>
+                        <div class="image-upload-container">
+                            <input type="file" id="articleImage" accept="image/*" class="form-control">
+                            <div class="image-preview" id="imagePreview" style="display: none;">
+                                <img id="previewImg" src="" alt="معاينة">
+                                <button type="button" class="btn-remove-image" id="removeImageBtn">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <input type="hidden" id="articleImageData">
+                        </div>
+                        <small>يمكنك رفع صورة بصيغة JPG, PNG, GIF (حجم أقصى 2MB)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>الملخص</label>
+                        <textarea id="articleSummary" class="form-control" rows="2" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>المحتوى الكامل</label>
+                        <small style="display: block; margin-bottom: 10px; color: #7f8c8d;">
+                            استخدم شريط الأدوات للتنسيق (عناوين، ألوان، قوائم، جداول، وأكثر)
+                        </small>
+                        <!-- Quill Editor Container -->
+                        <div id="editor-container" style="height: 400px; background: white; border-radius: 10px;"></div>
+                        <input type="hidden" id="articleContent">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelArticleBtn">إلغاء</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ المقال
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Question Modal -->
+    <div class="modal" id="questionModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>تعديل السؤال</h3>
+                <button class="modal-close" id="closeQuestionModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="questionForm">
+                    <input type="hidden" id="questionId">
+
+                    <div class="form-group">
+                        <label>نص السؤال</label>
+                        <input type="text" id="questionText" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>الخيارات</label>
+                        <div id="optionsList" class="options-container">
+                            <!-- Options will be added dynamically -->
+                        </div>
+                        <button type="button" class="btn btn-sm btn-secondary" id="addOptionBtn"
+                            style="margin-top: 10px;">
+                            <i class="fas fa-plus"></i> إضافة خيار
+                        </button>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelQuestionBtn">إلغاء</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ التغييرات
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-icon"></div>
+        <div class="toast-message"></div>
+    </div>
+
+    <!-- Quill JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="config.js"></script>
+    <script src="api.js"></script>
+    <script src="articles_data.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

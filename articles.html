@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="جميع مقالات مستشار مزارع الأسماك - دليلك الشامل للاستزراع السمكي">
+    <title>المقالات - مستشار مزارع الأسماك 🐟</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Additional styles for articles page */
+        .articles-page {
+            padding: 100px 0 50px;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            color: #1abc9c;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .filter-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1abc9c;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.95rem;
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .filter-select:hover {
+            border-color: var(--primary-color);
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #1abc9c;
+            box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #1abc9c;
+            box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #95a5a6;
+            pointer-events: none;
+        }
+
+        .clear-filters-btn {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .clear-filters-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Results Info */
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+        }
+
+        .results-count {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .sort-label {
+            font-size: 0.9rem;
+        }
+
+        .sort-select {
+            padding: 8px 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .sort-select option {
+            color: var(--text-color);
+        }
+
+        /* Articles Grid */
+        .all-articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .article-image-wrapper {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .article-icon {
+            font-size: 4rem;
+        }
+
+        .article-category-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1abc9c;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .article-content {
+            padding: 25px;
+        }
+
+        .article-date {
+            color: #95a5a6;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-summary {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1abc9c;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            gap: 12px;
+            color: #16a085;
+        }
+
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 80px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .no-results-icon {
+            font-size: 5rem;
+            color: #bdc3c7;
+            margin-bottom: 20px;
+        }
+
+        .no-results-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .no-results-text {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1abc9c;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .filter-options {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-select,
+            .search-box {
+                width: 100%;
+            }
+
+            .results-info {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .all-articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="ocean-bg">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🐟</span>
+                <h1>مستشار مزارع الأسماك</h1>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="articles.html" class="nav-link active"><i class="fas fa-book-open"></i> المقالات</a>
+                <a href="index.html#consult" class="nav-link"><i class="fas fa-comments"></i> استشارة</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="articles-page">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">📚 مكتبة المقالات</h1>
+                <p class="page-subtitle">دليلك الشامل للاستزراع السمكي الناجح</p>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-header">
+                    <i class="fas fa-filter"></i>
+                    <span>تصفية المقالات</span>
+                </div>
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <label class="filter-label">التصنيف:</label>
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="all">جميع التصنيفات</option>
+                            <!-- Categories will be populated dynamically -->
+                        </select>
+                    </div>
+
+                    <div class="search-box">
+                        <input type="text" id="searchInput" class="search-input" placeholder="ابحث في المقالات...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+
+                    <button id="clearFilters" class="clear-filters-btn">
+                        <i class="fas fa-times"></i>
+                        <span>مسح الفلاتر</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Info -->
+            <div class="results-info">
+                <div class="results-count">
+                    <i class="fas fa-newspaper"></i>
+                    <span id="resultsCount">جاري التحميل...</span>
+                </div>
+                <div class="sort-options">
+                    <span class="sort-label">ترتيب حسب:</span>
+                    <select id="sortSelect" class="sort-select">
+                        <option value="date-desc">الأحدث أولاً</option>
+                        <option value="date-asc">الأقدم أولاً</option>
+                        <option value="title-asc">العنوان (أ-ي)</option>
+                        <option value="title-desc">العنوان (ي-أ)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="loading">
+                <div class="spinner"></div>
+                <p>جاري تحميل المقالات...</p>
+            </div>
+
+            <!-- Articles Grid -->
+            <div id="articlesGrid" class="all-articles-grid" style="display: none;">
+                <!-- Articles will be loaded here -->
+            </div>
+
+            <!-- No Results -->
+            <div id="noResults" class="no-results" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <h3 class="no-results-title">لا توجد نتائج</h3>
+                <p class="no-results-text">جرب تغيير معايير البحث أو الفلترة</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span>🐟</span>
+                    <p>&copy; 2024 مستشار مزارع الأسماك. جميع الحقوق محفوظة.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-icon"></div>
+        <div class="toast-message"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="api.js?v=3.0"></script>
+    <script>
+        // Articles Page Logic
+        class ArticlesPage {
+            constructor() {
+                this.allArticles = [];
+                this.filteredArticles = [];
+                this.currentCategory = 'all';
+                this.currentSearch = '';
+                this.currentSort = 'date-desc';
+
+                this.init();
+            }
+
+            async init() {
+                await this.loadArticles();
+                this.bindEvents();
+            }
+
+            async loadArticles() {
+                try {
+                    const articles = await API.getArticles();
+                    this.allArticles = articles;
+                    this.filteredArticles = articles;
+
+                    this.populateCategories();
+                    this.renderArticles();
+                    this.updateResultsCount();
+
+                    document.getElementById('loadingState').style.display = 'none';
+                    document.getElementById('articlesGrid').style.display = 'grid';
+                } catch (error) {
+                    console.error('Error loading articles:', error);
+                    this.showError();
+                }
+            }
+
+            populateCategories() {
+                const categories = [...new Set(this.allArticles.map(a => a.category))];
+                const select = document.getElementById('categoryFilter');
+
+                categories.forEach(cat => {
+                    const option = document.createElement('option');
+                    option.value = cat;
+                    option.textContent = cat;
+                    select.appendChild(option);
+                });
+            }
+
+            renderArticles() {
+                const grid = document.getElementById('articlesGrid');
+                const noResults = document.getElementById('noResults');
+
+                if (this.filteredArticles.length === 0) {
+                    grid.style.display = 'none';
+                    noResults.style.display = 'block';
+                    return;
+                }
+
+                grid.style.display = 'grid';
+                noResults.style.display = 'none';
+                grid.innerHTML = '';
+
+                this.filteredArticles.forEach((article, index) => {
+                    const card = this.createArticleCard(article, index);
+                    grid.appendChild(card);
+                });
+            }
+
+
+            createArticleCard(article, index) {
+                const card = document.createElement('div');
+                card.className = 'article-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.cursor = 'pointer';
+
+                const imageContent = article.image_url
+                    ? `<img src="${article.image_url}" alt="${article.title}" class="article-img">`
+                    : `<div class="article-icon">${article.icon || '📄'}</div>`;
+
+                card.innerHTML = `
+                    <div class="article-image-wrapper">
+                        ${imageContent}
+                        <span class="article-category-badge">${article.category}</span>
+                    </div>
+                    <div class="article-content">
+                        <div class="article-date">
+                            <i class="far fa-calendar-alt"></i>
+                            ${article.date}
+                        </div>
+                        <h3 class="article-title">${article.title}</h3>
+                        <p class="article-summary">${article.summary}</p>
+                        <a href="article.html#${article.id}" class="read-more-btn">
+                            اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                `;
+
+                // Make entire card clickable
+                card.addEventListener('click', (e) => {
+                    // Don't navigate if clicking on the link itself
+                    if (e.target.tagName !== 'A') {
+                        window.location.href = `article.html#${article.id}`;
+                    }
+                });
+
+                return card;
+            }
+
+
+            filterArticles() {
+                let filtered = this.allArticles;
+
+                // Filter by category
+                if (this.currentCategory !== 'all') {
+                    filtered = filtered.filter(a => a.category === this.currentCategory);
+                }
+
+                // Filter by search
+                if (this.currentSearch) {
+                    const search = this.currentSearch.toLowerCase();
+                    filtered = filtered.filter(a =>
+                        a.title.toLowerCase().includes(search) ||
+                        a.summary.toLowerCase().includes(search) ||
+                        a.content.toLowerCase().includes(search)
+                    );
+                }
+
+                // Sort
+                filtered = this.sortArticles(filtered);
+
+                this.filteredArticles = filtered;
+                this.renderArticles();
+                this.updateResultsCount();
+            }
+
+            sortArticles(articles) {
+                const sorted = [...articles];
+
+                switch (this.currentSort) {
+                    case 'date-desc':
+                        return sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    case 'date-asc':
+                        return sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
+                    case 'title-asc':
+                        return sorted.sort((a, b) => a.title.localeCompare(b.title, 'ar'));
+                    case 'title-desc':
+                        return sorted.sort((a, b) => b.title.localeCompare(a.title, 'ar'));
+                    default:
+                        return sorted;
+                }
+            }
+
+            updateResultsCount() {
+                const count = this.filteredArticles.length;
+                const total = this.allArticles.length;
+                document.getElementById('resultsCount').textContent =
+                    `عرض ${count} من ${total} مقالة`;
+            }
+
+            clearFilters() {
+                this.currentCategory = 'all';
+                this.currentSearch = '';
+                this.currentSort = 'date-desc';
+
+                document.getElementById('categoryFilter').value = 'all';
+                document.getElementById('searchInput').value = '';
+                document.getElementById('sortSelect').value = 'date-desc';
+
+                this.filterArticles();
+            }
+
+            bindEvents() {
+                // Category filter
+                document.getElementById('categoryFilter').addEventListener('change', (e) => {
+                    this.currentCategory = e.target.value;
+                    this.filterArticles();
+                });
+
+                // Search
+                document.getElementById('searchInput').addEventListener('input', (e) => {
+                    this.currentSearch = e.target.value;
+                    this.filterArticles();
+                });
+
+                // Sort
+                document.getElementById('sortSelect').addEventListener('change', (e) => {
+                    this.currentSort = e.target.value;
+                    this.filterArticles();
+                });
+
+                // Clear filters
+                document.getElementById('clearFilters').addEventListener('click', () => {
+                    this.clearFilters();
+                });
+            }
+
+            showError() {
+                document.getElementById('loadingState').innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">⚠️</div>
+                        <h3 class="no-results-title">حدث خطأ</h3>
+                        <p class="no-results-text">فشل تحميل المقالات. يرجى تحديث الصفحة.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            new ArticlesPage();
+        });
+    </script>
+</body>
+
+</html>
