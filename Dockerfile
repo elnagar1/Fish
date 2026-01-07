@@ -1,9 +1,6 @@
 # استخدام Node.js 18 كـ base image
 FROM node:18-alpine
 
-# تثبيت serve globally
-RUN npm install -g serve
-
 # إنشاء مجلد العمل
 WORKDIR /app
 
@@ -11,20 +8,16 @@ WORKDIR /app
 COPY package*.json ./
 
 # تثبيت المكتبات
-RUN npm install --production
+RUN npm install
 
-# نسخ باقي الملفات
+# نسخ كل ملفات المشروع
+# هذا يتضمن server.js, add_articles.sql, api.js, والملفات الثابتة
 COPY . .
 
-# إنشاء قاعدة البيانات إذا لم تكن موجودة
-RUN if [ ! -f database.sqlite ]; then npm run init-db; fi
+# فتح المنفذ (Railway يحدد المنفذ ديناميكياً، لكن نعرض 3001 كافتراضي)
+EXPOSE 3001
 
-# فتح المنافذ
-EXPOSE 3000 3001
+# تشغيل السيرفر مباشرة
+# server.js الآن ذكي كفاية لإنشاء قاعدة البيانات إذا لم يجدها
+CMD ["node", "server.js"]
 
-# نسخ startup script
-COPY docker-start.sh /app/
-RUN chmod +x /app/docker-start.sh
-
-# تشغيل البرنامج
-CMD ["/app/docker-start.sh"]
