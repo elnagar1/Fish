@@ -24,6 +24,15 @@ app.use(express.static(__dirname)); // Serve files from current directory
 // Server Start (Moved to top for Railway)
 // ============================================
 
+// Health Check Endpoint (For Railway)
+app.get('/health', (req, res) => res.send('OK'));
+
+// Route Root to index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// IMPORTANT: Bind to 0.0.0.0 for external access
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
     console.log(`📊 API endpoints available at http://0.0.0.0:${PORT}/api`);
