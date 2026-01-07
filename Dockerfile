@@ -1,8 +1,12 @@
 # استخدام Node.js 18 كـ base image
 FROM node:18-alpine
 
+# تثبيت أدوات البناء اللازمة لـ sqlite3
+RUN apk add --no-cache python3 make g++
+
 # إنشاء مجلد العمل
 WORKDIR /app
+
 
 # نسخ package files
 COPY package*.json ./
